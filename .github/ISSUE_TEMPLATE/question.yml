@@ -1,0 +1,96 @@
+name: ❓ Question
+description: Ask a question about usage or functionality
+title: "[Question]: "
+labels: ["question", "triage"]
+assignees:
+  - TURPINJonathan
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? We're here to help!
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: What is your question about?
+      options:
+        - Installation/Setup
+        - Configuration (angular.json)
+        - Usage/How-to
+        - Troubleshooting
+        - Best practices
+        - Compatibility
+        - Contributing
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: Please be as specific as possible...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you trying to accomplish?
+      placeholder: I'm trying to...
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What Have You Tried?
+      description: What solutions have you already attempted?
+      placeholder: I tried...
+
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      description: What version are you using?
+      placeholder: e.g., 1.0.0
+
+  - type: input
+    id: angular-version
+    attributes:
+      label: Angular Version
+      description: What version of Angular?
+      placeholder: e.g., 20.0.0
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration
+      description: Share relevant parts of your angular.json configuration
+      render: json
+      placeholder: |
+        {
+          "cli": {
+            "schematicCollections": [...]
+          }
+        }
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Information
+      description: Any other relevant details
+      placeholder: Any additional context...
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have checked the README.md and CONTRIBUTING.md
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true
