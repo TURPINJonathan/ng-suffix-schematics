@@ -1,0 +1,83 @@
+{
+  "name": "@turpinjonathan/ng-suffix-schematics",
+  "version": "1.0.0",
+  "description": "Angular schematics that automatically add proper suffixes (.component, .service, .pipe, etc.) to file names and class names",
+  "keywords": [
+    "angular",
+    "schematics",
+    "angular-cli",
+    "ng-add",
+    "code-generation",
+    "suffix",
+    "component",
+    "service",
+    "directive",
+    "pipe",
+    "guard",
+    "interceptor",
+    "resolver"
+  ],
+  "author": "Jonathan TURPIN <https://github.com/TURPINJonathan>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TURPINJonathan/ng-suffix-schematics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TURPINJonathan/ng-suffix-schematics/issues"
+  },
+  "homepage": "https://github.com/TURPINJonathan/ng-suffix-schematics#readme",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && jasmine --config=spec/support/jasmine.json"
+  },
+  "schematics": "./collection.json",
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "peerDependencies": {
+    "@angular-devkit/core": "^20.0.0",
+    "@angular-devkit/schematics": "^20.0.0",
+    "@schematics/angular": "^20.0.0"
+  },
+  "dependencies": {
+    "@angular-devkit/core": "^20.0.0",
+    "@angular-devkit/schematics": "^20.0.0",
+    "@schematics/angular": "^20.0.0"
+  },
+  "files": [
+    "collection.json",
+    "component/**/*.js",
+    "component/**/*.d.ts",
+    "component/**/*.json",
+    "service/**/*.js",
+    "service/**/*.d.ts",
+    "service/**/*.json",
+    "directive/**/*.js",
+    "directive/**/*.d.ts",
+    "directive/**/*.json",
+    "pipe/**/*.js",
+    "pipe/**/*.d.ts",
+    "pipe/**/*.json",
+    "guard/**/*.js",
+    "guard/**/*.d.ts",
+    "guard/**/*.json",
+    "interceptor/**/*.js",
+    "interceptor/**/*.d.ts",
+    "interceptor/**/*.json",
+    "resolver/**/*.js",
+    "resolver/**/*.d.ts",
+    "resolver/**/*.json",
+    "utils/*.js",
+    "utils/*.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/jasmine": "^5.1.13",
+    "@types/node": "^24.10.1",
+    "jasmine": "^5.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
