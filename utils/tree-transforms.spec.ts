@@ -91,7 +91,7 @@ export class MyPipe implements PipeTransform {
       `);
 
       const rule = ensureClassSuffix(filePath, 'my-pipe', 'Pipe');
-      const result = rule(tree, null as any) as Tree;
+      const result = rule(tree, {} as any) as Tree;
 
       const content = result.read(filePath)?.toString('utf-8') || '';
       expect(content).toContain('export class MyPipePipe');
@@ -108,7 +108,7 @@ export class MyPipePipe implements PipeTransform {
       `);
 
       const rule = ensureClassSuffix(filePath, 'my-pipe', 'Pipe');
-      const result = rule(tree, null as any) as Tree;
+      const result = rule(tree, {} as any) as Tree;
 
       const content = result.read(filePath)?.toString('utf-8') || '';
       expect(content).toContain('export class MyPipePipe');
@@ -119,7 +119,7 @@ export class MyPipePipe implements PipeTransform {
       const filePath = '/src/app/non-existent.ts';
       
       const rule = ensureClassSuffix(filePath, 'non-existent', 'Pipe');
-      const result = rule(tree, null as any);
+      const result = rule(tree, {} as any);
 
       expect(result).toBe(tree);
     });
@@ -135,7 +135,7 @@ export class MyGuard implements CanActivate {
       `);
 
       const rule = ensureClassSuffix(filePath, 'my-guard', 'Guard');
-      const result = rule(tree, null as any) as Tree;
+      const result = rule(tree, {} as any) as Tree;
 
       const content = result.read(filePath)?.toString('utf-8') || '';
       expect(content).toContain('export class MyGuardGuard');
@@ -152,7 +152,7 @@ export class BaseService extends HttpService {
       `);
 
       const rule = ensureClassSuffix(filePath, 'base-service', 'Service');
-      const result = rule(tree, null as any) as Tree;
+      const result = rule(tree, {} as any) as Tree;
 
       const content = result.read(filePath)?.toString('utf-8') || '';
       expect(content).toContain('export class BaseServiceService');
@@ -163,7 +163,7 @@ export class BaseService extends HttpService {
       tree.create(filePath, 'export   class   MyDirective   {  }');
 
       const rule = ensureClassSuffix(filePath, 'my-directive', 'Directive');
-      const result = rule(tree, null as any) as Tree;
+      const result = rule(tree, {} as any) as Tree;
 
       const content = result.read(filePath)?.toString('utf-8') || '';
       expect(content).toContain('export class MyDirectiveDirective');

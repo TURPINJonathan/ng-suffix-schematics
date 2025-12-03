@@ -31,10 +31,10 @@ export function ensureClassSuffix(
     const expectedClassName = `${className}${suffix}`;
 
     // If the class doesn't already have the suffix, replace it
-    const classRegex = new RegExp(`export\\s+class\\s+${className}([^A-Za-z]|$)`, 'g');
-    if (classRegex.test(content) && !content.includes(`class ${expectedClassName}`)) {
+    const classRegex = new RegExp(`export\\s+class\\s+${className}([^A-Za-z]|$)`);
+    if (!content.includes(`class ${expectedClassName}`) && classRegex.test(content)) {
       content = content.replace(
-        classRegex,
+        new RegExp(`export\\s+class\\s+${className}([^A-Za-z]|$)`, 'g'),
         `export class ${expectedClassName}$1`
       );
       tree.overwrite(path, content);
