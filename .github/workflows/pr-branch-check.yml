@@ -1,0 +1,36 @@
+name: PR Branch Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR to main comes from develop only
+        if: github.base_ref == 'main'
+        run: |
+          if [[ "${{ github.head_ref }}" != "develop" ]]; then
+            echo "❌ Error: Pull requests to 'main' branch must come from 'develop' branch only."
+            echo "Current source branch: ${{ github.head_ref }}"
+            echo "Please create your PR to 'develop' branch instead."
+            exit 1
+          fi
+          echo "✅ Valid PR: develop -> main (release)"
+
+      - name: Check PR to develop comes from feature branch
+        if: github.base_ref == 'develop'
+        run: |
+          if [[ "${{ github.head_ref }}" == "main" ]]; then
+            echo "❌ Error: Cannot merge 'main' into 'develop'."
+            echo "Tip: If you need to sync, merge main into develop locally."
+            exit 1
+          fi
+          if [[ "${{ github.head_ref }}" != feature/* && "${{ github.head_ref }}" != hotfix/* ]]; then
+            echo "⚠️ Warning: PRs to 'develop' should come from 'feature/*' or 'hotfix/*' branches."
+            echo "Current source branch: ${{ github.head_ref }}"
+          fi
+          echo "✅ Valid PR: ${{ github.head_ref }} -> develop"
