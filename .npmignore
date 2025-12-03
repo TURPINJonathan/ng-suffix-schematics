@@ -1,0 +1,26 @@
+# Ignore tests FIRST (before the general *.ts rule)
+**/*.spec.ts
+**/*.spec.js
+**/*.spec.d.ts
+spec/
+
+# Ignore source TypeScript files in the published package
+*.ts
+!*.d.ts
+
+# Ignore development files
+tsconfig.json
+node_modules/
+.git/
+.gitignore
+*.log
+.DS_Store
+
+# Ignore CI/CD
+.github/
+
+# Ignore development documentation (keep only README.md)
+CONTRIBUTING.md
+
+# Include only compiled JavaScript and necessary files
+# Everything else is excluded by default

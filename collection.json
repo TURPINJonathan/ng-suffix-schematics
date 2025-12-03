@@ -1,0 +1,46 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "component": {
+      "description": "Create an Angular component with .component suffix",
+      "factory": "./component/index#component",
+      "schema": "./component/schema.json",
+      "aliases": ["c"]
+    },
+    "service": {
+      "description": "Create an Angular service with .service suffix",
+      "factory": "./service/index#service",
+      "schema": "./service/schema.json",
+      "aliases": ["s"]
+    },
+    "directive": {
+      "description": "Create an Angular directive with .directive suffix",
+      "factory": "./directive/index#directive",
+      "schema": "./directive/schema.json",
+      "aliases": ["d"]
+    },
+    "pipe": {
+      "description": "Create an Angular pipe with .pipe suffix",
+      "factory": "./pipe/index#pipe",
+      "schema": "./pipe/schema.json",
+      "aliases": ["p"]
+    },
+    "guard": {
+      "description": "Create an Angular guard with .guard suffix",
+      "factory": "./guard/index#guard",
+      "schema": "./guard/schema.json",
+      "aliases": ["g"]
+    },
+    "interceptor": {
+      "description": "Create an Angular interceptor with .interceptor suffix",
+      "factory": "./interceptor/index#interceptor",
+      "schema": "./interceptor/schema.json"
+    },
+    "resolver": {
+      "description": "Create an Angular resolver with .resolver suffix",
+      "factory": "./resolver/index#resolver",
+      "schema": "./resolver/schema.json",
+      "aliases": ["r"]
+    }
+  }
+}

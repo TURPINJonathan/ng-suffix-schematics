@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsAngularResolver",
+  "title": "Angular Resolver Options Schema",
+  "type": "object",
+  "description": "Creates a new Angular resolver with .resolver suffix",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the resolver.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the resolver?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the resolver."
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "flat": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, creates files at the top level of the project."
+    },
+    "skipTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not create \"spec.ts\" test files for the new resolver."
+    },
+    "functional": {
+      "type": "boolean",
+      "default": true,
+      "description": "Creates a functional resolver."
+    }
+  },
+  "required": ["name"]
+}

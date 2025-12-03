@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsAngularPipe",
+  "title": "Angular Pipe Options Schema",
+  "type": "object",
+  "description": "Creates a new Angular pipe with .pipe suffix",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the pipe.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the pipe?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the pipe."
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "flat": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, creates files at the top level of the project."
+    },
+    "skipTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not create \"spec.ts\" test files for the new pipe."
+    },
+    "standalone": {
+      "description": "Whether the pipe is standalone.",
+      "type": "boolean",
+      "default": true
+    },
+    "skipImport": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not import this pipe into the owning NgModule."
+    },
+    "export": {
+      "type": "boolean",
+      "default": false,
+      "description": "The declaring NgModule exports this pipe."
+    }
+  },
+  "required": ["name"]
+}
