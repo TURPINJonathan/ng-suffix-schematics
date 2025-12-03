@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "SchematicsAngularDirective",
+  "title": "Angular Directive Options Schema",
+  "type": "object",
+  "description": "Creates a new Angular directive with .directive suffix",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the directive.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the directive?"
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the directive."
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "prefix": {
+      "type": "string",
+      "description": "The prefix to apply to the generated directive selector."
+    },
+    "flat": {
+      "type": "boolean",
+      "default": false,
+      "description": "When true, creates files at the top level of the project."
+    },
+    "skipTests": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not create \"spec.ts\" test files for the new directive."
+    },
+    "standalone": {
+      "description": "Whether the directive is standalone.",
+      "type": "boolean",
+      "default": true
+    },
+    "selector": {
+      "type": "string",
+      "format": "html-selector",
+      "description": "The HTML selector to use for this directive."
+    },
+    "skipImport": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not import this directive into the owning NgModule."
+    },
+    "export": {
+      "type": "boolean",
+      "default": false,
+      "description": "The declaring NgModule exports this directive."
+    },
+    "type": {
+      "type": "string",
+      "description": "Adds a developer-defined type to the filename, in the format \"name.type.ts\".",
+      "default": "Directive"
+    }
+  },
+  "required": ["name"]
+}
