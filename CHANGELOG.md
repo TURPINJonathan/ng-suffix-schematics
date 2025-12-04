@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-12-04
+
+<details>
+<summary>View changes</summary>
+
+### Added
+- **Workspace defaults integration**: Automatically reads and respects `angular.json` configuration
+  - Supports workspace-level schematic defaults
+  - Supports project-level schematic defaults (overrides workspace)
+  - Reads project prefix for components and directives
+  - Supports multiple configuration key formats:
+    - Short format: `component`
+    - Angular CLI format: `@schematics/angular:component`
+    - Full package format: `@turpinjonathan/ng-suffix-schematics:component`
+  - Proper options precedence: workspace < project < command-line
+- **Enhanced test coverage**: 102 tests (added 3 integration tests)
+  - Test for project prefix usage from `angular.json`
+  - Test for workspace-level schematic defaults
+  - Test for workspace and project-level defaults merge
+
+### Changed
+- **Code optimization**: Refactored `getWorkspaceDefaults()` function
+  - Reduced from ~80 to ~50 lines
+  - Added helper function to eliminate duplication
+  - Improved maintainability and readability
+
+</details>
+
 ## [1.1.0] - 2025-12-04
 
 <details>
@@ -70,5 +98,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.2.0]: https://github.com/TURPINJonathan/ng-suffix-schematics/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/TURPINJonathan/ng-suffix-schematics/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/TURPINJonathan/ng-suffix-schematics/releases/tag/v1.0.0

@@ -1,12 +1,10 @@
 # Angular Suffix Schematics
 [![npm version](https://badge.fury.io/js/%40turpinjonathan%2Fng-suffix-schematics.svg)](https://www.npmjs.com/package/@turpinjonathan/ng-suffix-schematics)
 [![CI](https://github.com/TURPINJonathan/ng-suffix-schematics/actions/workflows/ci.yml/badge.svg)](https://github.com/TURPINJonathan/ng-suffix-schematics/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
 📋 [Changelog](CHANGELOG.md) • 🤝 [Contributing](CONTRIBUTING.md) • 🐛 [Report Issues](https://github.com/TURPINJonathan/ng-suffix-schematics/issues)
 
 > Angular CLI schematics that automatically add proper suffixes (`.component`, `.service`, `.pipe`, etc.) to file names and class names in Angular 20+
-
-
 
 ## 🚀 Why?
 
@@ -106,6 +104,45 @@ ng g r my-resolver       # Resolver
 
 All standard Angular CLI options work: `--flat`, `--skip-tests`, `--standalone`, etc.
 
+## ⚙️ Configuration
+
+This package respects your `angular.json` configuration. You can define defaults at workspace or project level:
+
+```json
+{
+  "schematics": {
+    "@turpinjonathan/ng-suffix-schematics:component": {
+      "style": "scss",
+      "standalone": true,
+      "changeDetection": "OnPush"
+    },
+    "@schematics/angular:service": {
+      "flat": false
+    },
+    "component": {
+      "skipTests": true
+    }
+  },
+  "projects": {
+    "my-app": {
+      "prefix": "app",
+      "schematics": {
+        "@turpinjonathan/ng-suffix-schematics:component": {
+          "style": "less"
+        }
+      }
+    }
+  }
+}
+```
+
+**Supported key formats:**
+- `component` - Short format
+- `@schematics/angular:component` - Angular CLI format
+- `@turpinjonathan/ng-suffix-schematics:component` - Full package format
+
+**Priority order:** Workspace defaults < Project defaults < Command-line options
+
 ## 🔧 Supported Options
 <details>
 <summary>See all CLI options available</summary>
@@ -153,9 +190,10 @@ ng g p currency --standalone
 - ✅ **Guards**: Generates `name.guard.ts` with functional guard (Angular 20+)
 - ✅ **Interceptors**: Generates `name.interceptor.ts` with functional interceptor (Angular 20+)
 - ✅ **Resolvers**: Generates `name.resolver.ts` with functional resolver (Angular 20+)
-- ✅ Respects all Angular CLI configuration options (prefix, style, changeDetection, etc.)
+- ✅ **Workspace defaults integration**: Respects `angular.json` configuration
 - ✅ Works with nested paths: `ng g c features/admin/dashboard`
 - ✅ Compatible with Angular 20+
+- ✅ **102 comprehensive tests**: Unit and integration testing
 
 ## 📝 Example Angular.json Configuration
 
@@ -241,6 +279,15 @@ Test coverage includes:
 All tests run automatically on every push via GitHub Actions CI/CD with Node.js 18.x, 20.x, and 22.x.
 
 </details>
+
+## 📊 Compatibility
+
+| Package Version | Angular Version | Status |
+|----------------|-----------------|--------|
+| 1.x.x          | 20.x           | ✅ Supported |
+
+> **Note**: This package follows Angular's versioning. Each major version is compatible with the corresponding Angular major version.
+
 
 ## 🤝 Contributing
 
