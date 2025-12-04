@@ -134,4 +134,89 @@ describe('component schematic', () => {
     const content = tree.read('/src/app/test/test.component.ts')?.toString();
     expect(content).toContain('export class TestComponent');
   });
+
+  it('should use project prefix from angular.json', async () => {
+    appTree.overwrite('/angular.json', JSON.stringify({
+      version: 1,
+      projects: {
+        'test-app': {
+          root: '',
+          sourceRoot: 'src',
+          projectType: 'application',
+          prefix: 'app'
+        }
+      }
+    }));
+
+    const tree = await runner.runSchematic('component', {
+      name: 'my-component',
+      project: 'test-app'
+    }, appTree);
+
+    const content = tree.read('/src/app/my-component/my-component.component.ts')?.toString();
+    expect(content).toContain('selector: \'app-my-component\'');
+  });
+
+  it('should use workspace-level schematic defaults', async () => {
+    appTree.overwrite('/angular.json', JSON.stringify({
+      version: 1,
+      schematics: {
+        'component': {
+          style: 'scss'
+        }
+      },
+      projects: {
+        'test-app': {
+          root: '',
+          sourceRoot: 'src',
+          projectType: 'application'
+        }
+      }
+    }));
+
+    const tree = await runner.runSchematic('component', {
+      name: 'my-component',
+      project: 'test-app',
+      skipTests: true
+    }, appTree);
+
+    expect(tree.exists('/src/app/my-component/my-component.component.scss')).toBe(true);
+    expect(tree.exists('/src/app/my-component/my-component.component.css')).toBe(false);
+  });
+
+  it('should merge workspace and project-level defaults correctly', async () => {
+    appTree.overwrite('/angular.json', JSON.stringify({
+      version: 1,
+      schematics: {
+        'component': {
+          style: 'scss',
+          standalone: true
+        }
+      },
+      projects: {
+        'test-app': {
+          root: '',
+          sourceRoot: 'src',
+          projectType: 'application',
+          prefix: 'app',
+          schematics: {
+            'component': {
+              changeDetection: 'OnPush'
+            }
+          }
+        }
+      }
+    }));
+
+    const tree = await runner.runSchematic('component', {
+      name: 'my-component',
+      project: 'test-app',
+      skipTests: true
+    }, appTree);
+
+    const content = tree.read('/src/app/my-component/my-component.component.ts')?.toString();
+    expect(content).toContain('selector: \'app-my-component\'');
+    expect(content).toContain('changeDetection: ChangeDetectionStrategy.OnPush');
+    expect(tree.exists('/src/app/my-component/my-component.component.scss')).toBe(true);
+  });
 });

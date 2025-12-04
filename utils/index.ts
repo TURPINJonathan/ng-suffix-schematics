@@ -13,6 +13,66 @@ export interface BaseSchematicOptions {
 }
 
 /**
+ * Get workspace default options for a specific schematic
+ */
+function getWorkspaceDefaults(
+  tree: Tree,
+  schematicName: string,
+  project?: string
+): Record<string, any> {
+  const angularJsonPath = '/angular.json';
+  if (!tree.exists(angularJsonPath)) {
+    return {};
+  }
+
+  try {
+    const angularJsonContent = tree.read(angularJsonPath);
+    if (!angularJsonContent) return {};
+
+    const angularJson = JSON.parse(angularJsonContent.toString('utf-8'));
+    const defaults: Record<string, any> = {};
+
+    const targetProject = project || angularJson.defaultProject;
+
+    const mergeSchematicOptions = (config: any) => {
+      if (!config?.schematics) return;
+      
+      const schematicKeys = [
+        schematicName,
+        `@schematics/angular:${schematicName}`,
+        `@turpinjonathan/ng-suffix-schematics:${schematicName}`
+      ];
+
+      schematicKeys.forEach(key => {
+        if (config.schematics[key]) {
+          Object.assign(defaults, config.schematics[key]);
+        }
+      });
+    };
+
+    mergeSchematicOptions(angularJson);
+
+    if (targetProject && angularJson.projects?.[targetProject]) {
+      const projectConfig = angularJson.projects[targetProject];
+      
+      mergeSchematicOptions(projectConfig);
+
+      if (
+        projectConfig.prefix &&
+        ['component', 'directive'].includes(schematicName) &&
+        typeof defaults.prefix === 'undefined'
+      ) {
+        defaults.prefix = projectConfig.prefix;
+      }
+    }
+
+    return defaults;
+  } catch (e) {
+    return {};
+  }
+}
+
+/**
  * Post-process generated files to ensure class names have proper suffixes
  */
 export function ensureClassSuffix(
@@ -126,7 +186,13 @@ export function createSimpleSchematic(
 ) {
   return function<T extends BaseSchematicOptions & { type?: string }>(options: T): Rule {
     return (tree: Tree, context: SchematicContext) => {
-      const modifiedOptions = { ...options, type: typeSuffix };
+      const defaults = getWorkspaceDefaults(tree, schematicName, options.project);
+      
+      const modifiedOptions = { 
+        ...defaults,
+        ...options, 
+        type: typeSuffix 
+      };
       
       return chain([
         externalSchematic('@schematics/angular', schematicName, modifiedOptions)
@@ -145,16 +211,23 @@ export function createComplexSchematic(
 ) {
   return function<T extends BaseSchematicOptions>(options: T): Rule {
     return (tree: Tree, context: SchematicContext) => {
-      const baseName = extractBaseName(options.name);
+      const defaults = getWorkspaceDefaults(tree, schematicName, options.project);
+      
+      const mergedOptions = { 
+        ...defaults,
+        ...options
+      };
+      
+      const baseName = extractBaseName(mergedOptions.name);
       const fileName = buildFilePath(
-        options.name,
-        options.path,
+        mergedOptions.name,
+        mergedOptions.path,
         schematicName,
-        options.flat || false
+        mergedOptions.flat || false
       );
       
       return chain([
-        externalSchematic('@schematics/angular', schematicName, options),
+        externalSchematic('@schematics/angular', schematicName, mergedOptions),
         ensureClassSuffix(fileName, baseName, suffixName),
         (tree: Tree) => removeDuplicateSuffix(tree, fileName, baseName, schematicName)
       ])(tree, context);
