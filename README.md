@@ -226,10 +226,10 @@ ng g p currency --standalone
 
 ## 🧪 Testing
 
-**89 comprehensive tests** ensure reliability across all schematics:
-- **27 tests** - Utilities (path manipulation & tree transformations)
-- **10 tests** - ng-add schematic (automatic configuration)
-- **52 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
+**99 comprehensive tests** ensure reliability across all schematics:
+- **28 tests** - Utilities (path manipulation & tree transformations)
+- **11 tests** - ng-add schematic (automatic configuration)
+- **60 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
 
 Test coverage includes:
 - ✅ File generation with correct suffixes

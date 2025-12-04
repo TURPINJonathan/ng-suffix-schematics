@@ -168,10 +168,10 @@ The `npm test` command:
 
 ### Test Coverage
 
-**89 comprehensive tests** covering:
-- ✅ **27 tests** - Utilities (path manipulation, tree transformations)
-- ✅ **10 tests** - ng-add schematic (angular.json configuration)
-- ✅ **52 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
+**99 comprehensive tests** covering:
+- ✅ **28 tests** - Utilities (path manipulation, tree transformations)
+- ✅ **11 tests** - ng-add schematic (angular.json configuration)
+- ✅ **60 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
 
 Each schematic is tested for:
 - File generation with correct suffixes
