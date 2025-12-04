@@ -47,6 +47,9 @@
   },
   "files": [
     "collection.json",
+    "ng-add/**/*.js",
+    "ng-add/**/*.d.ts",
+    "ng-add/**/*.json",
     "component/**/*.js",
     "component/**/*.d.ts",
     "component/**/*.json",
