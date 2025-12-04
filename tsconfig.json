@@ -13,5 +13,5 @@
     "types": ["node", "jasmine"]
   },
   "include": ["./**/*.ts"],
-  "exclude": ["./*/files/**/*", "./node_modules/**/*", "./**/*.spec.ts"]
+  "exclude": ["./*/files/**/*", "./node_modules/**/*"]
 }

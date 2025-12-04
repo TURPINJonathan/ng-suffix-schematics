@@ -30,7 +30,6 @@ export function ensureClassSuffix(
     const className = strings.classify(baseName);
     const expectedClassName = `${className}${suffix}`;
 
-    // If the class doesn't already have the suffix, replace it
     const classRegex = new RegExp(`export\\s+class\\s+${className}([^A-Za-z]|$)`);
     if (!content.includes(`class ${expectedClassName}`) && classRegex.test(content)) {
       content = content.replace(
@@ -63,7 +62,6 @@ export function removeDuplicateSuffix(
   const oldSpecPath = `${directory}/${oldFileName}.spec.ts`;
   const newSpecPath = `${directory}/${newFileName}.spec.ts`;
   
-  // Rename the main file
   if (tree.exists(oldFilePath)) {
     const content = tree.read(oldFilePath);
     if (content) {
@@ -72,10 +70,8 @@ export function removeDuplicateSuffix(
     }
   }
   
-  // Rename the spec file
   if (tree.exists(oldSpecPath)) {
     let specContent = tree.read(oldSpecPath)?.toString('utf-8') || '';
-    // Update imports in the spec file
     specContent = specContent.replace(
       new RegExp(`\\./${oldFileName}`, 'g'),
       `./${newFileName}`

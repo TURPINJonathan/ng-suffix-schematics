@@ -35,16 +35,13 @@ export function ngAdd(): Rule {
     const packageName = '@turpinjonathan/ng-suffix-schematics';
     const angularSchematics = '@schematics/angular';
     
-    // Remove our package if it exists (to re-add at the beginning)
     const existingIndex = angularJson.cli.schematicCollections.indexOf(packageName);
     if (existingIndex !== -1) {
       angularJson.cli.schematicCollections.splice(existingIndex, 1);
     }
     
-    // Add our package at the beginning for priority
     angularJson.cli.schematicCollections.unshift(packageName);
     
-    // Ensure @schematics/angular is present (add at end if missing)
     if (!angularJson.cli.schematicCollections.includes(angularSchematics)) {
       angularJson.cli.schematicCollections.push(angularSchematics);
     }
