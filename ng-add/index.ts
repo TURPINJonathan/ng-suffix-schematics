@@ -15,7 +15,14 @@ export function ngAdd(): Rule {
       return tree;
     }
 
-    const angularJson = JSON.parse(angularJsonContent.toString('utf-8'));
+    let angularJson: any;
+    try {
+      angularJson = JSON.parse(angularJsonContent.toString('utf-8'));
+    } catch (e) {
+      context.logger.error('angular.json contains invalid JSON. Please fix the file and try again.');
+      context.logger.error(`Parsing error: ${(e as Error).message}`);
+      return tree;
+    }
 
     if (!angularJson.cli) {
       angularJson.cli = {};
@@ -26,17 +33,26 @@ export function ngAdd(): Rule {
     }
 
     const packageName = '@turpinjonathan/ng-suffix-schematics';
+    const angularSchematics = '@schematics/angular';
     
-    if (!angularJson.cli.schematicCollections.includes(packageName)) {
-      angularJson.cli.schematicCollections.unshift(packageName);
-      
-      if (!angularJson.cli.schematicCollections.includes('@schematics/angular')) {
-        angularJson.cli.schematicCollections.push('@schematics/angular');
-      }
+    // Remove our package if it exists (to re-add at the beginning)
+    const existingIndex = angularJson.cli.schematicCollections.indexOf(packageName);
+    if (existingIndex !== -1) {
+      angularJson.cli.schematicCollections.splice(existingIndex, 1);
+    }
+    
+    // Add our package at the beginning for priority
+    angularJson.cli.schematicCollections.unshift(packageName);
+    
+    // Ensure @schematics/angular is present (add at end if missing)
+    if (!angularJson.cli.schematicCollections.includes(angularSchematics)) {
+      angularJson.cli.schematicCollections.push(angularSchematics);
+    }
 
+    if (existingIndex === -1) {
       context.logger.info(`✅ Added ${packageName} to schematic collections`);
     } else {
-      context.logger.info(`ℹ️ ${packageName} is already configured`);
+      context.logger.info(`✅ Updated ${packageName} position in schematic collections`);
     }
     
     tree.overwrite(angularJsonPath, JSON.stringify(angularJson, null, 2));

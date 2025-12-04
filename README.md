@@ -137,7 +137,9 @@ All standard Angular CLI options work: `--flat`, `--skip-tests`, `--standalone`,
 **Example with options:**
 ```bash
 ng g c my-component --flat --skip-tests --standalone
-ng g s api/auth --change-detection=OnPush
+ng g c admin/dashboard --change-detection=OnPush --inline-template
+ng g s api/auth --skip-tests
+ng g p currency --standalone
 ```
 
 </details>
@@ -224,9 +226,9 @@ ng g s api/auth --change-detection=OnPush
 
 ## 🧪 Testing
 
-**87 comprehensive tests** ensure reliability across all schematics:
+**89 comprehensive tests** ensure reliability across all schematics:
 - **27 tests** - Utilities (path manipulation & tree transformations)
-- **8 tests** - ng-add schematic (automatic configuration)
+- **10 tests** - ng-add schematic (automatic configuration)
 - **52 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
 
 Test coverage includes:

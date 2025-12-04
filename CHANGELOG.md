@@ -16,9 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Places package first in collections for priority
   - Prevents duplicate entries
   - One-command installation: `ng add @turpinjonathan/ng-suffix-schematics`
-- **Comprehensive test suite**: 87 tests covering all schematics
+- **Comprehensive test suite**: 89 tests covering all schematics
   - 27 tests for utilities (path manipulation & tree transformations)
-  - 8 tests for ng-add schematic
+  - 10 tests for ng-add schematic
   - 52 tests for all schematics (component, service, pipe, directive, guard, interceptor, resolver)
   - Tests for edge cases: duplicate suffixes, nested paths, special characters, all CLI options
 
