@@ -4,6 +4,9 @@ Thank you for your interest in contributing! 🎉
 
 ## Development Setup
 
+<details>
+<summary>View setup instructions</summary>
+
 1. **Clone the repository**
 ```bash
 git clone https://github.com/TURPINJonathan/ng-suffix-schematics.git
@@ -25,22 +28,29 @@ npm run build
 npm test
 ```
 
+</details>
+
 ## Project Structure
+
+<details>
+<summary>View project structure</summary>
 
 ```
 ng-suffix-schematics/
-├── utils/              # Shared utilities and factories
-│   ├── index.ts       # Main utility functions
-│   └── index.spec.ts  # Unit tests
-├── component/         # Component schematic
-├── service/           # Service schematic
-├── directive/         # Directive schematic
-├── pipe/              # Pipe schematic
-├── guard/             # Guard schematic
-├── interceptor/       # Interceptor schematic
-├── resolver/          # Resolver schematic
-└── collection.json    # Schematics configuration
+├── utils/                    # Shared utilities and factories
+├── ng-add/                   # ng-add schematic (auto-configuration)
+├── component/service/pipe/   # Angular schematics (simple type forcing)
+├── directive/guard/          # Angular schematics (complex with renaming)
+├── interceptor/resolver/     # Angular schematics (complex with renaming)
+└── collection.json           # Schematics registry
+
+Each schematic folder contains:
+  ├── index.ts         # Schematic implementation
+  ├── index.spec.ts    # Integration tests
+  └── schema.json      # Schema definition
 ```
+
+</details>
 
 ## Git Workflow
 
@@ -136,6 +146,9 @@ git push origin feature/your-feature-name
 
 ## Testing
 
+<details>
+<summary>View testing guide</summary>
+
 ### Running Tests
 
 ```bash
@@ -153,49 +166,21 @@ The `npm test` command:
 1. Compiles TypeScript (`npm run build`)
 2. Executes all Jasmine tests
 
-### Test Structure
-
-```
-ng-suffix-schematics/
-├── utils/
-│   ├── path-utils.spec.ts        # Path manipulation tests
-│   └── tree-transforms.spec.ts   # File tree transformation tests
-├── spec/
-│   └── support/
-│       └── jasmine.json          # Jasmine configuration
-└── package.json
-```
-
 ### Test Coverage
 
-This package includes **27 comprehensive unit tests** covering:
+**87 comprehensive tests** covering:
+- ✅ **27 tests** - Utilities (path manipulation, tree transformations)
+- ✅ **8 tests** - ng-add schematic (angular.json configuration)
+- ✅ **52 tests** - All schematics (component, service, pipe, directive, guard, interceptor, resolver)
 
-#### Path Utilities (`path-utils.spec.ts`) - 16 tests
+Each schematic is tested for:
+- File generation with correct suffixes
+- Class/function naming conventions
+- Nested paths and special characters
+- Options: `flat`, `skipTests`, `standalone`, etc.
+- Edge cases: duplicate suffixes, type enforcement
 
-**extractBaseName** (6 tests):
-- Simple paths, nested paths, deep nesting
-- Empty strings and special characters
-
-**buildFilePath** (10 tests):
-- Flat and nested structures
-- Default paths and custom paths
-- CamelCase normalization
-- All schematic types (component, service, pipe, guard, interceptor)
-
-#### Tree Transformations (`tree-transforms.spec.ts`) - 11 tests
-
-**removeDuplicateSuffix** (5 tests):
-- File renaming (dash → dot format)
-- Spec file updates with import rewrites
-- Edge cases (missing files, CamelCase)
-
-**ensureClassSuffix** (6 tests):
-- Class name suffix addition
-- Duplicate suffix prevention
-- Handles implements/extends clauses
-- Multiple spaces normalization
-
-**Test Results:** 27 specs, 0 failures, 100% success rate ✅
+Run `npm test` to execute all tests. All PRs must pass 100% of tests.
 
 ### Manual Testing
 
@@ -211,36 +196,19 @@ npm install /path/to/tarball.tgz
 ng generate component test
 ```
 
+</details>
+
 ## CI/CD
 
 All pull requests are automatically tested via GitHub Actions:
-- ✅ Build verification
-- ✅ Unit tests
-- ✅ TypeScript compilation check
-- ✅ Tests on Node 18.x, 20.x, and 22.x
-
-## Branch Protection Rules
-
-This repository enforces the following protections:
-
-### Main Branch
-- ✅ Require pull request reviews before merging
-- ✅ Require approval from maintainer (@TURPINJonathan)
-- ✅ Only accept PRs from `develop` branch
-- ✅ Require status checks to pass (CI tests)
-- ❌ No direct pushes
-- ❌ No force pushes
-- ❌ No branch deletion
-
-### Develop Branch
-- ✅ Require pull request reviews before merging
-- ✅ Require approval from maintainer (@TURPINJonathan)
-- ✅ Only accept PRs from `feature/*` branches
-- ✅ Require status checks to pass (CI tests)
-- ❌ No direct pushes
-- ❌ No force pushes
+- ✅ Build verification & unit tests
+- ✅ Multi-version testing (Node 18.x, 20.x, 22.x)
+- ✅ Branch validation (features → develop → main)
 
 ## Release Process (Maintainer Only)
+
+<details>
+<summary>View release process</summary>
 
 1. **Integrate features:**
    - Merge approved `feature/*` PRs to `develop`
@@ -277,6 +245,8 @@ This repository enforces the following protections:
    git merge main
    git push origin develop
    ```
+
+</details>
 
 ## Questions?
 
