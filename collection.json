@@ -1,6 +1,11 @@
 {
   "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
+    "ng-add": {
+      "description": "Configure Angular project to use ng-suffix-schematics",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    },
     "component": {
       "description": "Create an Angular component with .component suffix",
       "factory": "./component/index#component",
