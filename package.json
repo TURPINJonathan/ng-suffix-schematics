@@ -1,6 +1,6 @@
 {
   "name": "@turpinjonathan/ng-suffix-schematics",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Angular schematics that automatically add proper suffixes (.component, .service, .pipe, etc.) to file names and class names",
   "keywords": [
     "angular",
@@ -47,6 +47,9 @@
   },
   "files": [
     "collection.json",
+    "ng-add/**/*.js",
+    "ng-add/**/*.d.ts",
+    "ng-add/**/*.json",
     "component/**/*.js",
     "component/**/*.d.ts",
     "component/**/*.json",
@@ -71,6 +74,7 @@
     "utils/*.js",
     "utils/*.d.ts",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "devDependencies": {
